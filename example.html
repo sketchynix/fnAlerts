@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>fnAlerts Example</title>
+	<link rel="stylesheet" type="text/css" href="/fnAlerts.css">
+</head>
+<body ng-app="testApp">
+	<h1>fnAlerts Example</h1>
+	<fn-alerts-display></fn-alerts-display>
+
+	<div ng-controller="testController">
+		<button ng-click="removeAlert()">Remove Alert</button>
+	</div>
+
+	<script src="/fnAlerts.js"></script>
+	<script>
+		var App = angular.module('testApp', ['fnAlerts']);
+
+		App.controller('testController', function($scope, Alerts){
+			Alerts.add('Successful Alert with no timeout!', 'success');
+
+			Alerts.add('Error alert!', 'error');
+
+			Alerts.add('Alert disappears after 10 seconds', 'success', 10000);
+
+			var alertIndex = Alerts.add('Click button to remove this alert', '', null, false);
+
+			$scope.removeAlert = function(){
+				Alerts.remove(alertIndex);
+			};
+
+			$scope.removeAll = function(){
+				Alerts.removeAll();
+			}
+
+		});
+
+	</script>
+</body>
